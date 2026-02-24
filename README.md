@@ -35,7 +35,7 @@ The application includes comprehensive information for various legal and governm
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Yashwatts/documentation-pathway.git
+git clone https://github.com/ridhibhatia17/documentation-pathway
 cd legal-Task-Management
 ```
 
