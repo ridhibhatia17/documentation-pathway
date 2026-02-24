@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Legal Task Portal</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --surface: #111827;
+        --text: #e5e7eb;
+        --primary: #22d3ee;
+        --accent: #f59e0b;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        line-height: 1.6;
+      }
+
+      .main-container {
+        background: rgba(17, 24, 39, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 18px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        margin: 2rem auto;
+        max-width: 1200px;
+        overflow: hidden;
+      }
+      .header {
+        background: var(--surface);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text);
+        padding: 1.25rem 1rem;
+        text-align: center;
+      }
+      .header h1 {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0;
+      }
+      .header .sub {
+        color: rgba(229, 231, 235, 0.7);
+        margin-top: 0.25rem;
+      }
+
+      .workspace {
+        position: relative;
+        min-height: calc(100vh - 140px);
+        padding: 1rem;
+        transition: all 0.35s ease;
+      }
+
+      .sidebar {
+        background: rgba(17, 24, 39, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        transition: transform 0.35s ease, opacity 0.35s ease,
+          box-shadow 0.35s ease, border-color 0.35s ease;
+      }
+      body:not(.mode-results) .sidebar {
+        transform: scale(1.02);
+      }
+      body.mode-results .sidebar {
+        transform: none;
+      }
+
+      .content {
+        background: rgba(17, 24, 39, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        transition: transform 0.35s ease, opacity 0.25s ease;
+        opacity: 0;
+      }
+      body.mode-results .content {
+        display: block;
+        opacity: 1;
+        padding: 1rem;
+        min-height: 60vh;
+        transform: translateY(0);
+      }
+
+      .prompt-title {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .nlp-card {
+        background: transparent;
+        border: 0;
+        border-radius: 14px;
+      }
+      .search-box {
+        background: #0f1621;
+        color: var(--text);
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 1.15rem 1rem 1.15rem 2.6rem;
+        font-size: 1.2rem;
+        outline: none;
+        width: 100%;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .search-box::placeholder {
+        color: rgba(229, 231, 235, 0.55);
+      }
+      .search-box:focus {
+        border-color: rgba(34, 211, 238, 0.8);
+        box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.15);
+        transform: translateY(-1px);
+      }
+      .search-icon {
+        position: absolute;
+        left: 1.15rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(229, 231, 235, 0.65);
+        font-size: 1rem;
+      }
+      .search-btn {
+        border-radius: 12px;
+        padding: 0.95rem 1.25rem;
+        font-weight: 700;
+        background: var(--primary);
+        color: #001419;
+        border: none;
+        transition: transform 0.15s ease, box-shadow 0.15s ease,
+          opacity 0.2s ease;
+        width: 100%;
+      }
+      .search-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(34, 211, 238, 0.25);
+      }
+      .search-btn:disabled {
+        opacity: 0.6;
+      }
+
+      .result-panel {
+        border-radius: 12px;
+      }
+      .result-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.25rem 0.25rem 0.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        margin-bottom: 0.75rem;
+      }
+      .result-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .result-actions a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .result-actions a:hover {
+        text-decoration: underline;
+      }
+
+      .result-shell {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        background: #0f1621;
+        min-height: 60vh;
+      }
+      @media (max-width: 576px) {
+        .result-shell {
+          min-height: 55vh;
+        }
+      }
+      .result-loading {
+        position: absolute;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.02)
+        );
+        backdrop-filter: blur(2px);
+        z-index: 2;
+      }
+      .pulse {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 30% 30%,
+          rgba(34, 211, 238, 0.9),
+          rgba(34, 211, 238, 0.25)
+        );
+        animation: pulse 1.1s ease-in-out infinite;
+        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.35);
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(0.98);
+          box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.35);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 14px rgba(34, 211, 238, 0);
+        }
+        100% {
+          transform: scale(0.98);
+          box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
+        }
+      }
+      .result-frame {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 62vh;
+        border: 0;
+        background: transparent;
+      }
+
+      .small-muted {
+        color: rgba(229, 231, 235, 0.6);
+        font-size: 0.9rem;
+      }
+
+      /* Center help content when no results */
+      body:not(.mode-results) #workspace {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding-bottom: 7.5rem; /* space for docked prompt */
+      }
+      .help-section {
+        background: rgba(17, 24, 39, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 1.25rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      }
+      .help-title {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .help-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+      @media (max-width: 992px) {
+        .help-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .help-card {
+        background: #0f1621;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+        padding: 0.9rem;
+        transition: transform 0.18s ease, border-color 0.18s ease,
+          background-color 0.18s ease;
+      }
+      .help-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(34, 211, 238, 0.45);
+        background: rgba(15, 22, 33, 0.9);
+      }
+      .example-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+      .chip {
+        cursor: pointer;
+        background: rgba(34, 211, 238, 0.12);
+        border: 1px solid rgba(34, 211, 238, 0.35);
+        color: var(--text);
+        padding: 0.4rem 0.7rem;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: transform 0.15s ease, background 0.15s ease,
+          border-color 0.15s ease;
+      }
+      .chip:hover {
+        transform: translateY(-1px);
+        background: rgba(34, 211, 238, 0.18);
+        border-color: rgba(34, 211, 238, 0.55);
+      }
+
+      /* Dock prompt at bottom initially */
+      body:not(.mode-results) .sidebar {
+        position: fixed;
+        left: 50%;
+        bottom: 1.25rem;
+        transform: translateX(-50%);
+        width: min(900px, 92vw);
+        z-index: 50;
+        padding: 0.75rem 0.9rem;
+        background: rgba(17, 24, 39, 0.92);
+      }
+
+      /* Two-pane layout when showing results */
+      body.mode-results #workspace {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        gap: 1rem;
+        align-items: start;
+      }
+      @media (max-width: 992px) {
+        body.mode-results #workspace {
+          grid-template-columns: 1fr;
+        }
+      }
+      body.mode-results .sidebar {
+        position: sticky;
+        top: 1rem;
+        width: auto;
+        transform: none;
+        z-index: 1;
+        padding: 0.9rem;
+      }
+      body.mode-results .content {
+        display: block;
+      }
+      /* Hide help when results are shown */
+      body.mode-results .help-section {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-container">
+        <div class="header">
+          <h1 class="mb-1">
+            <i class="fas fa-pen-to-square me-2 text-info"></i>Legal Task
+            Assistant
+          </h1>
+          <p class="sub mb-0">
+            Ask in natural language and get clear, structured answers.
+          </p>
+        </div>
+
+        <div id="workspace" class="workspace">
+          <!-- Added central help/documentation section -->
+          <section class="help-section" aria-label="How I can help">
+            <div class="help-title">
+              <i class="fa-solid fa-sparkles text-info"></i>
+              <span>How I can help with documentation</span>
+            </div>
+            <p class="small-muted mb-3">
+              Type a question below or pick an example to get started. I’ll
+              return clear steps, required documents, and official links.
+            </p>
+            <div class="help-grid">
+              <div class="help-card">
+                <h6 class="mb-2">
+                  <i class="fa-solid fa-id-card me-2 text-info"></i>Identity &
+                  Cards
+                </h6>
+                <ul class="mb-2 small-muted ps-3">
+                  <li>Government IDs, PAN, Aadhaar, Voter ID</li>
+                  <li>Name/address updates</li>
+                </ul>
+                <div class="example-chips">
+                  <button
+                    class="chip"
+                    onclick="searchTask('How do I apply for a PAN card?')"
+                  >
+                    Apply for PAN
+                  </button>
+                  <button
+                    class="chip"
+                    onclick="searchTask('How can I update my Aadhaar address?')"
+                  >
+                    Update Aadhaar
+                  </button>
+                </div>
+              </div>
+              <div class="help-card">
+                <h6 class="mb-2">
+                  <i class="fa-solid fa-heart me-2 text-warning"></i>Personal &
+                  Family
+                </h6>
+                <ul class="mb-2 small-muted ps-3">
+                  <li>Marriage registration</li>
+                  <li>Birth/death certificates</li>
+                </ul>
+                <div class="example-chips">
+                  <button
+                    class="chip"
+                    onclick="searchTask('How do I register my marriage?')"
+                  >
+                    Register marriage
+                  </button>
+                  <button
+                    class="chip"
+                    onclick="searchTask('How to get a birth certificate?')"
+                  >
+                    Birth certificate
+                  </button>
+                </div>
+              </div>
+              <div class="help-card">
+                <h6 class="mb-2">
+                  <i class="fa-solid fa-briefcase me-2 text-info"></i>Business &
+                  Property
+                </h6>
+                <ul class="mb-2 small-muted ps-3">
+                  <li>Firm registration, GST</li>
+                  <li>Property records</li>
+                </ul>
+                <div class="example-chips">
+                  <button
+                    class="chip"
+                    onclick="searchTask('Private Limited Company Registration')"
+                  >
+                    Register company
+                  </button>
+                  <button
+                    class="chip"
+                    onclick="searchTask('How to apply for GST?')"
+                  >
+                    Apply for GST
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- End of added central help/documentation section -->
+
+          <aside class="sidebar">
+            <div class="nlp-card">
+              <div class="prompt-title">
+                <i class="fa-solid fa-sparkles text-info"></i>
+                <span>Ask the Assistant</span>
+              </div>
+              <form
+                method="POST"
+                action="/task"
+                class="row g-2 align-items-center"
+              >
+                <div class="col-12">
+                  <div class="position-relative">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input
+                      type="text"
+                      name="task_name"
+                      class="search-box"
+                      placeholder='Ask anything like "How do I register my marriage?"'
+                      autocomplete="off"
+                      aria-label="Ask a legal question"
+                    />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn search-btn">
+                    <i class="fas fa-paper-plane me-2"></i>Ask
+                  </button>
+                  <div class="small-muted mt-2">
+                    Tip: Try “How do I apply for a PAN card?”
+                  </div>
+                </div>
+              </form>
+            </div>
+          </aside>
+
+          <main class="content">
+            <div
+              id="result-panel"
+              class="result-panel"
+              hidden
+              aria-live="polite"
+              aria-busy="false"
+            >
+              <div class="result-header">
+                <div class="result-title">
+                  <i class="fas fa-notes-medical text-info"></i>
+                  <span>Result</span>
+                </div>
+                <div class="result-actions">
+                  <a id="open-full" href="#" target="_blank" rel="noopener"
+                    >Open full page</a
+                  >
+                </div>
+              </div>
+              <div class="result-shell">
+                <div id="result-loading" class="result-loading">
+                  <div class="pulse" aria-label="Loading"></div>
+                </div>
+                <iframe
+                  id="result-frame"
+                  class="result-frame"
+                  title="Result"
+                ></iframe>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+      function searchTask(taskName) {
+        document.querySelector('input[name="task_name"]').value = taskName;
+        document
+          .querySelector('form[action="/task"]')
+          .dispatchEvent(
+            new Event("submit", { cancelable: true, bubbles: true })
+          );
+      }
+
+      (function () {
+        const searchForm = document.querySelector('form[action="/task"]');
+        if (!searchForm) return;
+
+        const input = searchForm.querySelector('input[name="task_name"]');
+        const btn = searchForm.querySelector('button[type="submit"]');
+        const panel = document.getElementById("result-panel");
+        const frame = document.getElementById("result-frame");
+        const loading = document.getElementById("result-loading");
+        const openFull = document.getElementById("open-full");
+
+        searchForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const query = (input.value || "").trim();
+          if (!query) return;
+
+          document.body.classList.add("mode-results");
+
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML =
+            '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Thinking...';
+          btn.disabled = true;
+
+          try {
+            const mapped = await fetch("/nlp_search", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ query }),
+            }).then((r) => r.json());
+
+            if (!mapped?.success || !mapped?.task) {
+              throw new Error(
+                mapped?.message || "No relevant legal task found."
+              );
+            }
+
+            const fd = new FormData();
+            fd.append("task_name", mapped.task);
+
+            panel.hidden = false;
+            panel.setAttribute("aria-busy", "true");
+            loading.style.display = "flex";
+
+            const res = await fetch("/task", { method: "POST", body: fd });
+            const html = await res.text();
+
+            frame.srcdoc = html;
+
+            // Reset button immediately after successful API response
+            btn.innerHTML = originalHTML;
+            btn.disabled = false;
+
+            // Handle loading animation separately
+            setTimeout(() => {
+              loading.style.display = "none";
+              panel.setAttribute("aria-busy", "false");
+              panel.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 300);
+
+            openFull.href = "/task";
+            openFull.onclick = (ev) => {
+              ev.preventDefault();
+              const f = document.createElement("form");
+              f.method = "POST";
+              f.action = "/task";
+              const i = document.createElement("input");
+              i.type = "hidden";
+              i.name = "task_name";
+              i.value = mapped.task;
+              f.appendChild(i);
+              document.body.appendChild(f);
+              f.submit();
+            };
+          } catch (err) {
+            alert(err.message || "Error loading result.");
+            panel.hidden = true;
+            document.body.classList.remove("mode-results");
+            // Reset button state immediately on error
+            btn.innerHTML = originalHTML;
+            btn.disabled = false;
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

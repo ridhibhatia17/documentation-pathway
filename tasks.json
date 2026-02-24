@@ -1,0 +1,2004 @@
+{
+  "tasks": [
+    {
+      "task_id": "aadhaar_registration",
+      "title": "Aadhaar Card Registration",
+      "description": "Register for a new Aadhaar card or update existing details.",
+      "required_documents": [
+        "Proof of Identity (e.g., Passport, PAN Card, Voter ID)",
+        "Proof of Address (e.g., Utility Bill, Bank Statement)",
+        "Proof of Date of Birth (e.g., Birth Certificate)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the UIDAI official portal.",
+            "Fill in the online application form.",
+            "Schedule an appointment at the nearest Aadhaar Enrollment Center.",
+            "Visit the center with original documents for biometric authentication."
+          ],
+          "website": "https://uidai.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit the nearest Aadhaar Enrollment Center.",
+            "Fill out the application form available at the center.",
+            "Submit original documents for verification.",
+            "Provide biometric details (fingerprints, iris scan)."
+          ],
+          "google_places_keyword": "Aadhaar Enrollment Center"
+        }
+      },
+      "approx_processing_time": "2-3 weeks",
+      "sources": [
+        { "name": "UIDAI Official Website", "url": "https://uidai.gov.in" }
+      ]
+    },
+    {
+      "task_id": "pan_card_application",
+      "title": "PAN Card Application",
+      "description": "Apply for a new PAN card or make corrections to existing details.",
+      "required_documents": [
+        "Proof of Identity (e.g., Passport, Voter ID)",
+        "Proof of Address (e.g., Utility Bill, Bank Statement)",
+        "Passport-size Photograph"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the NSDL or UTIITSL portal.",
+            "Select the application type (Form 49A for Indian citizens).",
+            "Fill in the online application form.",
+            "Upload scanned copies of required documents.",
+            "Pay the application fee online."
+          ],
+          "website": "https://www.tin-nsdl.com"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Download and print Form 49A from the NSDL website.",
+            "Fill out the form manually.",
+            "Attach passport-size photograph and self-attested copies of documents.",
+            "Submit the form at the nearest PAN center."
+          ],
+          "google_places_keyword": "PAN Card Facilitation Center"
+        }
+      },
+      "approx_processing_time": "15-20 days",
+      "sources": [
+        { "name": "NSDL Official Website", "url": "https://www.tin-nsdl.com" }
+      ]
+    },
+    {
+      "task_id": "passport_application",
+      "title": "Passport Application",
+      "description": "Apply for a new passport or renew an existing one.",
+      "required_documents": [
+        "Proof of Identity (e.g., Aadhaar, Voter ID)",
+        "Proof of Address (e.g., Utility Bill, Bank Statement)",
+        "Proof of Date of Birth (e.g., Birth Certificate)",
+        "Passport-size Photographs"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the Passport Seva Portal.",
+            "Register and log in to your account.",
+            "Fill in the online application form.",
+            "Pay the application fee online.",
+            "Schedule an appointment at the nearest Passport Seva Kendra."
+          ],
+          "website": "https://portal2.passportindia.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Download the passport application form from the Passport Seva Portal.",
+            "Fill out the form manually.",
+            "Attach passport-size photographs and self-attested copies of documents.",
+            "Submit the form at the nearest Passport Seva Kendra."
+          ],
+          "google_places_keyword": "Passport Seva Kendra"
+        }
+      },
+      "approx_processing_time": "3-4 weeks",
+      "sources": [
+        { "name": "Passport Seva Portal", "url": "https://portal2.passportindia.gov.in" }
+      ]
+    },
+    {
+      "task_id": "marriage_registration",
+      "title": "Marriage Registration",
+      "description": "Register a marriage under the Special Marriage Act or respective state laws.",
+      "required_documents": [
+        "Marriage Certificate",
+        "Proof of Identity of both parties",
+        "Proof of Address of both parties",
+        "Passport-size Photographs"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the official marriage registration portal of your state.",
+            "Fill in the online application form.",
+            "Upload scanned copies of required documents.",
+            "Pay the registration fee online.",
+            "Schedule an appointment for document verification."
+          ],
+          "website": "https://www.onlinemarriageregistration.com"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit the local sub-registrar's office.",
+            "Fill out the marriage registration form.",
+            "Submit original documents for verification.",
+            "Provide passport-size photographs.",
+            "Pay the registration fee."
+          ],
+          "google_places_keyword": "Sub-Registrar Office"
+        }
+      },
+      "approx_processing_time": "2-4 weeks",
+      "sources": [
+        { "name": "Online Marriage Registration", "url": "https://www.onlinemarriageregistration.com" }
+      ]
+    },
+    {
+      "task_id": "gst_registration",
+      "title": "GST Registration",
+      "description": "Register for Goods and Services Tax (GST) for business operations.",
+      "required_documents": [
+        "PAN Card",
+        "Proof of Business Registration or Incorporation Certificate",
+        "Identity and Address Proof of Promoters/Directors with photographs",
+        "Address Proof of Business Place",
+        "Bank Account Statement/Cancelled Cheque"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the GST Portal.",
+            "Click on 'Services' > 'Registration' > 'New Registration'.",
+            "Fill in the required details in the application form.",
+            "Upload scanned copies of required documents.",
+            "Submit the application for processing."
+          ],
+          "website": "https://www.gst.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": [
+            "Currently, GST registration is only available online through the official portal."
+          ]
+        }
+      },
+      "approx_processing_time": "7-10 days",
+      "sources": [
+        { "name": "GST Portal", "url": "https://www.gst.gov.in" }
+      ]
+    },
+    {
+      "task_id": "voter_id_registration",
+      "title": "Voter ID Registration",
+      "description": "Register to vote in Indian elections by obtaining a Voter ID card.",
+      "required_documents": [
+        "Proof of Identity (e.g., Passport, Aadhaar)",
+        "Proof of Address (e.g., Utility Bill, Bank Statement)",
+        "Passport-size Photograph"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the National Voter's Service Portal.",
+            "Fill in Form 6 for new voter registration.",
+            "Upload scanned copies of required documents.",
+            "Submit the application for processing."
+          ],
+          "website": "https://www.nvsp.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit the local Electoral Registration Office.",
+            "Fill out Form 6 for new voter registration.",
+            "Submit original documents for verification.",
+            "Provide passport-size photographs."
+          ],
+          "google_places_keyword": "Electoral Registration Office"
+        }
+      },
+      "approx_processing_time": "30-60 days",
+      "sources": [
+        { "name": "National Voter's Service Portal", "url": "https://www.nvsp.in" }
+      ]
+    },
+    {
+      "task_id": "ration_card_application",
+      "title": "Ration Card Application",
+      "description": "Apply for a new ration card or update existing details.",
+      "required_documents": [
+        "Proof of Identity (e.g., Aadhaar, Voter ID)",
+        "Proof of Address (e.g., Utility Bill, Bank Statement)",
+        "Passport-size Photograph"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the official ration card portal of your state.",
+            "Register and log in to your account.",
+            "Fill in the online application form.",
+            "Upload scanned copies of required documents.",
+            "Submit the application for processing."
+          ],
+          "website": "https://www.nfsa.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit the local ration shop or government office.",
+            "Obtain and fill out the ration card application form.",
+            "Submit original documents for verification.",
+            "Provide passport-size photographs."
+          ],
+          "google_places_keyword": "Ration Shop"
+        }
+      },
+      "approx_processing_time": "30-45 days",
+      "sources": [
+        { "name": "National Food Security Act Portal", "url": "https://www.nfsa.gov.in" }
+      ]
+    },
+    {
+      "task_id": "driving_license_application",
+      "title": "Driving License Application",
+      "description": "Apply for a new driving license or renew an existing one.",
+      "required_documents": [
+        "Proof of Identity (e.g., Aadhaar, Passport)",
+        "Proof of Address (e.g., Utility Bill, Bank Statement)",
+        "Passport-size Photograph",
+        "Learner's License (for new applicants)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the official RTO Parivahan Sewa portal.",
+            "Fill in the online application form.",
+            "Upload scanned copies of required documents.",
+            "Pay the application fee online.",
+            "Schedule an appointment for driving test."
+          ],
+          "website": "https://parivahan.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit the nearest RTO office.",
+            "Submit the filled application form with originals.",
+            "Provide passport-size photographs and learner's license (if applicable).",
+            "Take the driving test and submit biometric data if required."
+          ],
+          "google_places_keyword": "Regional Transport Office"
+        }
+      },
+      "approx_processing_time": "30-45 days",
+      "sources": [
+        { "name": "Parivahan Sewa", "url": "https://parivahan.gov.in" }
+      ]
+    },
+    {
+      "task_id": "property_registration",
+      "title": "Property Registration (Sale/Lease)",
+      "description": "Register the sale, purchase, or lease of immovable property.",
+      "required_documents": [
+        "Sale Deed / Agreement to Sell",
+        "Title documents / Previous ownership papers",
+        "ID & Address Proof (Aadhaar, PAN, Passport)",
+        "No Objection Certificate (if applicable)",
+        "Payment receipts / Tax Paid Receipts"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Check if e-registration is available in your state.",
+            "Calculate stamp duty and pay online if applicable.",
+            "Book slot with Sub-Registrar.",
+            "Upload documents and submit online.",
+            "Visit office for final signing."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit Sub-Registrar office with original documents.",
+            "Pay stamp duty / registration fee.",
+            "Sign deeds in presence of registrar.",
+            "Receive registered property documents."
+          ],
+          "google_places_keyword": "Sub-Registrar Office"
+        }
+      },
+      "approx_processing_time": "15-30 days",
+      "sources": [
+        { "name": "State Property Registration Guidelines", "url": "" }
+      ]
+    },
+    {
+      "task_id": "company_registration",
+      "title": "Private Limited Company Registration",
+      "description": "Register a private limited company under MCA regulations.",
+      "required_documents": [
+        "PAN Card of directors",
+        "Identity Proof of directors",
+        "Address Proof of directors",
+        "Digital Signature Certificates",
+        "Director Identification Numbers (DIN)",
+        "Registered office proof",
+        "MoA & AoA",
+        "Declaration by directors (Form INC-9)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via MCA SPICe+ portal.",
+            "Reserve company name and upload required documents.",
+            "Pay registration fee online.",
+            "Obtain Certificate of Incorporation, DIN, PAN/GST (optional)."
+          ],
+          "website": "https://www.mca.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["Company registration must be done online through MCA portal."],
+          "google_places_keyword": ""
+        }
+      },
+      "approx_processing_time": "7-10 days",
+      "sources": [
+        { "name": "MCA SPICe+ Guidelines", "url": "https://www.mca.gov.in" }
+      ]
+    },
+    {
+      "task_id": "fssai_registration",
+      "title": "FSSAI Registration / License",
+      "description": "Obtain Food Safety and Standards Authority of India registration/license.",
+      "required_documents": [
+        "PAN of business",
+        "ID and address proof of applicant",
+        "Business premises proof",
+        "Photo of business site"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via FSSAI online portal.",
+            "Upload required documents.",
+            "Pay fee online and obtain license number."
+          ],
+          "website": "https://www.fssai.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit local Food Safety Office.",
+            "Submit application and required documents in person.",
+            "Receive FSSAI license."
+          ],
+          "google_places_keyword": "Food Safety Office"
+        }
+      },
+      "approx_processing_time": "15-20 days",
+      "sources": [
+        { "name": "FSSAI Official Portal", "url": "https://www.fssai.gov.in" }
+      ]
+    },
+    {
+      "task_id": "income_certificate",
+      "title": "Income Certificate",
+      "description": "Apply for an income certificate (Delhi example, Aadhaar mandatory).",
+      "required_documents": [
+        "Aadhaar Card (mandatory)",
+        "Proof of birth for minors (Birth Certificate/School ID)",
+        "Alternate ID (PAN, Passport, Driving License)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit Delhi Revenue Department portal.",
+            "Fill in application and authenticate via Aadhaar.",
+            "Submit online and download certificate."
+          ],
+          "website": "https://delhi.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit Revenue Office with Aadhaar/enrollment slip and ID.",
+            "Fill application form and submit documents in person.",
+            "Receive certificate."
+          ],
+          "google_places_keyword": "Revenue Office"
+        }
+      },
+      "approx_processing_time": "7-10 days",
+      "sources": [
+        { "name": "Delhi Revenue Department", "url": "https://delhi.gov.in" }
+      ]
+    },
+    {
+      "task_id": "rent_agreement_registration",
+      "title": "Rent Agreement Registration",
+      "description": "Register a rent agreement between landlord and tenant.",
+      "required_documents": [
+        "ID proofs of tenant and landlord",
+        "Address Proof",
+        "PAN of parties",
+        "Passport-size photos",
+        "Stamp paper as per state"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Use state e-registration/e-stamp portals.",
+            "Pay fees online and book sub-registrar slot.",
+            "Submit documents and register agreement."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Prepare agreement on stamp paper.",
+            "Visit sub-registrar office with parties and witnesses.",
+            "Submit documents, pay registration fees, get agreement registered."
+          ],
+          "google_places_keyword": "Sub-Registrar Office"
+        }
+      },
+      "approx_processing_time": "7-10 days",
+      "sources": [
+        { "name": "State e-Stamp Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "msme_udyam_registration",
+      "title": "MSME (Udyam) Registration",
+      "description": "Register a micro/small/medium enterprise to obtain a Udyam Registration Number.",
+      "required_documents": [
+        "Aadhaar of proprietor/primary signatory",
+        "PAN of business/proprietor",
+        "Business name and address",
+        "Bank account details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit the Udyam Registration portal.",
+            "Authenticate with Aadhaar OTP.",
+            "Enter PAN, business details, and bank information.",
+            "Submit to generate Udyam Registration Number."
+          ],
+          "website": "https://udyamregistration.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": [
+            "Udyam registration is available only online."
+          ]
+        }
+      },
+      "approx_processing_time": "Immediate",
+      "sources": [
+        { "name": "Udyam Registration Portal", "url": "https://udyamregistration.gov.in" }
+      ]
+    },
+    {
+      "task_id": "importer_exporter_code",
+      "title": "Importer Exporter Code (IEC)",
+      "description": "Obtain IEC for import/export activities in India.",
+      "required_documents": [
+        "PAN of entity",
+        "Address proof of business",
+        "Bank details / cancelled cheque",
+        "Entity incorporation/constitution documents (as applicable)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on the DGFT portal.",
+            "Fill IEC application and upload documents.",
+            "Pay the fee and submit.",
+            "Download IEC once approved."
+          ],
+          "website": "https://www.dgft.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["IEC application is processed online via DGFT."]
+        }
+      },
+      "approx_processing_time": "1-3 days",
+      "sources": [
+        { "name": "DGFT", "url": "https://www.dgft.gov.in" }
+      ]
+    },
+    {
+      "task_id": "gem_seller_registration",
+      "title": "GeM Seller Registration",
+      "description": "Register as a seller on Government e-Marketplace (GeM) to sell to government buyers.",
+      "required_documents": [
+        "PAN and Aadhaar",
+        "Udyam Registration (recommended)",
+        "Bank account details",
+        "Business incorporation documents"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Go to GeM portal and select 'Seller' sign-up.",
+            "Verify Aadhaar and email/mobile.",
+            "Provide business, bank, and tax details.",
+            "Complete profile and list products/services."
+          ],
+          "website": "https://gem.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["GeM registration is entirely online."]
+        }
+      },
+      "approx_processing_time": "1-3 days",
+      "sources": [
+        { "name": "Government e-Marketplace", "url": "https://gem.gov.in" }
+      ]
+    },
+    {
+      "task_id": "trademark_registration",
+      "title": "Trademark Registration",
+      "description": "Apply to register a brand name/logo under the Trade Marks Act.",
+      "required_documents": [
+        "Applicant identity and address proof",
+        "Logo/device image (if applicable)",
+        "TM class description",
+        "User affidavit/proof of prior use (if claiming prior use)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Create account on the IP India TM e-filing portal.",
+            "Conduct search (optional) and prepare application.",
+            "Upload documents and pay fees.",
+            "Track examination, opposition, and registration status."
+          ],
+          "website": "https://ipindiaonline.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit the nearest Trade Marks Registry office.",
+            "Submit Form with required documents and fees."
+          ],
+          "google_places_keyword": "Trade Marks Registry"
+        }
+      },
+      "approx_processing_time": "6-18 months (varies)",
+      "sources": [
+        { "name": "IP India – TM e-filing", "url": "https://ipindiaonline.gov.in" }
+      ]
+    },
+    {
+      "task_id": "patent_application",
+      "title": "Patent Application Filing",
+      "description": "File provisional/complete specification to protect an invention.",
+      "required_documents": [
+        "Provisional/complete specification and drawings",
+        "Applicant and inventor details",
+        "Power of attorney (if agent)",
+        "Priority documents (if any)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on IP India patent e-filing portal.",
+            "Prepare forms and specification.",
+            "Upload documents and pay fees.",
+            "Request examination and respond to office actions."
+          ],
+          "website": "https://ipindiaonline.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit physical forms and specification at Patent Office."
+          ],
+          "google_places_keyword": "Patent Office India"
+        }
+      },
+      "approx_processing_time": "12-36+ months",
+      "sources": [
+        { "name": "IP India – Patents", "url": "https://ipindiaonline.gov.in" }
+      ]
+    },
+    {
+      "task_id": "design_registration",
+      "title": "Industrial Design Registration",
+      "description": "Register the visual design/shape/pattern of an article.",
+      "required_documents": [
+        "Representations of design (views/images)",
+        "Statement of novelty",
+        "Applicant details",
+        "Power of attorney (if agent)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via IP India Designs e-filing.",
+            "Upload representations and details.",
+            "Pay fees and track examination."
+          ],
+          "website": "https://ipindiaonline.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit design application at the Designs Office."
+          ],
+          "google_places_keyword": "Designs Office Kolkata"
+        }
+      },
+      "approx_processing_time": "6-12 months",
+      "sources": [
+        { "name": "IP India – Designs", "url": "https://ipindiaonline.gov.in" }
+      ]
+    },
+    {
+      "task_id": "epfo_employer_registration",
+      "title": "EPFO Employer Registration",
+      "description": "Register establishment with Employees’ Provident Fund Organisation.",
+      "required_documents": [
+        "PAN and incorporation details",
+        "Address proof",
+        "Authorized signatory details",
+        "Bank account details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Sign up on EPFO Unified Employer portal.",
+            "Enter establishment details and upload documents.",
+            "Submit for approval; obtain establishment ID."
+          ],
+          "website": "https://www.epfindia.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["Registration is online via EPFO portal."]
+        }
+      },
+      "approx_processing_time": "3-7 days",
+      "sources": [
+        { "name": "EPFO", "url": "https://www.epfindia.gov.in" }
+      ]
+    },
+    {
+      "task_id": "esic_employer_registration",
+      "title": "ESIC Employer Registration",
+      "description": "Enroll establishment under Employees’ State Insurance for employee benefits.",
+      "required_documents": [
+        "PAN and incorporation certificate",
+        "Address proof of establishment",
+        "Bank details",
+        "Employee count and wage details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Create account on ESIC portal.",
+            "Fill establishment and employee details.",
+            "Upload documents and submit to get ESIC code."
+          ],
+          "website": "https://www.esic.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit local ESIC branch office.",
+            "Submit application with documents."
+          ],
+          "google_places_keyword": "ESIC Branch Office"
+        }
+      },
+      "approx_processing_time": "3-7 days",
+      "sources": [
+        { "name": "ESIC", "url": "https://www.esic.gov.in" }
+      ]
+    },
+    {
+      "task_id": "labour_license_clra",
+      "title": "Labour License (CLRA) Registration",
+      "description": "Obtain registration/license under the Contract Labour (Regulation & Abolition) Act.",
+      "required_documents": [
+        "PAN and entity details",
+        "Work order/contract details",
+        "Employee/contract labour details",
+        "Address proof and ID proofs"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via Shram Suvidha Portal.",
+            "Fill forms, upload documents, and pay fees.",
+            "Track application and download license."
+          ],
+          "website": "https://shramsuvidha.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit application at Labour Department office with documents."
+          ],
+          "google_places_keyword": "Labour Department Office"
+        }
+      },
+      "approx_processing_time": "7-15 days",
+      "sources": [
+        { "name": "Shram Suvidha", "url": "https://shramsuvidha.gov.in" }
+      ]
+    },
+    {
+      "task_id": "shops_establishment_registration",
+      "title": "Shops & Establishment Registration",
+      "description": "Register a shop/commercial establishment under state law.",
+      "required_documents": [
+        "Owner ID and address proof",
+        "Premises proof (rent agreement/ownership)",
+        "Photo of establishment",
+        "Business details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Use your state’s labour/eDistrict portal.",
+            "Fill application, upload documents, pay fee.",
+            "Download registration certificate."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit local Labour Department office.",
+            "Submit form with documents and fees."
+          ],
+          "google_places_keyword": "Shops & Establishment Office"
+        }
+      },
+      "approx_processing_time": "7-15 days (varies by state)",
+      "sources": [
+        { "name": "State Labour/E-District Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "professional_tax_registration",
+      "title": "Professional Tax Registration (Employer/Professionals)",
+      "description": "Register for state professional tax as employer/individual, where applicable.",
+      "required_documents": [
+        "PAN, Aadhaar",
+        "Business registration documents",
+        "Address proof",
+        "Employee details (for employers)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply on respective state's commercial tax portal.",
+            "Upload documents and pay fees.",
+            "Receive registration credentials."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply at the Professional Tax office with documents."
+          ],
+          "google_places_keyword": "Professional Tax Office"
+        }
+      },
+      "approx_processing_time": "3-10 days",
+      "sources": [
+        { "name": "State Commercial Tax Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "trade_license_municipal",
+      "title": "Municipal Trade License",
+      "description": "Obtain a trade/health license from the local municipal authority.",
+      "required_documents": [
+        "Owner ID and address proof",
+        "Business registration proof",
+        "Premises proof and NOC",
+        "Layout/photo (as applicable)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply on your city’s ULB portal.",
+            "Upload documents and pay fees.",
+            "Schedule inspection if required."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit application at Municipal Corporation office.",
+            "Provide documents; attend inspection if scheduled."
+          ],
+          "google_places_keyword": "Municipal Corporation Office"
+        }
+      },
+      "approx_processing_time": "7-15 days",
+      "sources": [
+        { "name": "City ULB Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "birth_certificate",
+      "title": "Birth Certificate",
+      "description": "Register a birth and obtain the birth certificate.",
+      "required_documents": [
+        "Hospital birth record/letter",
+        "Parents’ ID/address proof",
+        "Application form"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Use the Civil Registration System (CRS) portal if supported.",
+            "Submit details and request certificate.",
+            "Download or collect certificate as instructed."
+          ],
+          "website": "https://crsorgi.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply at Municipal/Gram Panchayat office.",
+            "Submit hospital record and proofs.",
+            "Collect certificate after processing."
+          ],
+          "google_places_keyword": "Municipal Office / Gram Panchayat"
+        }
+      },
+      "approx_processing_time": "7-15 days",
+      "sources": [
+        { "name": "CRS (Office of Registrar General)", "url": "https://crsorgi.gov.in" }
+      ]
+    },
+    {
+      "task_id": "death_certificate",
+      "title": "Death Certificate",
+      "description": "Register a death and obtain the death certificate.",
+      "required_documents": [
+        "Medical certificate of cause of death",
+        "ID/address proof of informant",
+        "Application form"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via CRS or state municipal portal.",
+            "Upload required documents and submit.",
+            "Download certificate or collect as directed."
+          ],
+          "website": "https://crsorgi.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply at Municipal/Gram Panchayat office.",
+            "Submit documents and pay fees if any.",
+            "Collect certificate after processing."
+          ],
+          "google_places_keyword": "Municipal Office / Gram Panchayat"
+        }
+      },
+      "approx_processing_time": "7-15 days",
+      "sources": [
+        { "name": "CRS (Office of Registrar General)", "url": "https://crsorgi.gov.in" }
+      ]
+    },
+    {
+      "task_id": "caste_certificate",
+      "title": "Caste Certificate (SC/ST/OBC)",
+      "description": "Obtain caste certificate for availing reservations/benefits.",
+      "required_documents": [
+        "Applicant ID and address proof",
+        "Affidavit/declaration",
+        "Parents’/family caste proof (if available)",
+        "Local residence proof"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via your state's eDistrict portal.",
+            "Upload documents and submit.",
+            "Download certificate when approved."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit application to Tehsildar/SDM office.",
+            "Provide proofs for verification."
+          ],
+          "google_places_keyword": "Tehsildar / SDM Office"
+        }
+      },
+      "approx_processing_time": "15-30 days",
+      "sources": [
+        { "name": "State eDistrict Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "domicile_certificate",
+      "title": "Domicile Certificate",
+      "description": "Obtain domicile/residence certificate from state authorities.",
+      "required_documents": [
+        "Applicant ID proof",
+        "Address proof and residence duration proof",
+        "Affidavit/declaration"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply on state eDistrict portal.",
+            "Upload documents and submit.",
+            "Download certificate after approval."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply at Tehsildar/SDM office with documents."
+          ],
+          "google_places_keyword": "Tehsildar / SDM Office"
+        }
+      },
+      "approx_processing_time": "7-20 days",
+      "sources": [
+        { "name": "State eDistrict Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "ews_certificate",
+      "title": "EWS Certificate",
+      "description": "Get Economically Weaker Section certificate for eligible candidates.",
+      "required_documents": [
+        "ID and address proof",
+        "Income certificate",
+        "Affidavit/declaration",
+        "Other state-specific proofs"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply on state eDistrict portal.",
+            "Upload documents and submit.",
+            "Track status and download certificate."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply at Tehsildar/SDM office.",
+            "Submit documents and collect certificate on approval."
+          ],
+          "google_places_keyword": "Tehsildar / SDM Office"
+        }
+      },
+      "approx_processing_time": "7-20 days",
+      "sources": [
+        { "name": "State eDistrict Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "udid_disability_card",
+      "title": "UDID (Unique Disability ID) Card",
+      "description": "Register for a national disability ID card and certificate.",
+      "required_documents": [
+        "Recent passport-size photo",
+        "Identity and address proof",
+        "Disability medical certificate/reports from authorized hospital"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on the UDID portal.",
+            "Fill application and upload medical documents.",
+            "Track status and download e-UDID."
+          ],
+          "website": "https://www.swavlambancard.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply via designated district hospital/medical board."
+          ],
+          "google_places_keyword": "District Hospital Medical Board"
+        }
+      },
+      "approx_processing_time": "15-30 days",
+      "sources": [
+        { "name": "UDID Portal", "url": "https://www.swavlambancard.gov.in" }
+      ]
+    },
+    {
+      "task_id": "abha_health_id",
+      "title": "ABHA (Ayushman Bharat Health Account) ID",
+      "description": "Create a digital health ID to link health records.",
+      "required_documents": [
+        "Mobile number and/or Aadhaar",
+        "Basic demographic details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Visit ABHA portal/app.",
+            "Authenticate via mobile/Aadhaar.",
+            "Generate ABHA number and download card."
+          ],
+          "website": "https://abha.abdm.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Create ABHA at participating hospitals/health centers."
+          ],
+          "google_places_keyword": "ABDM Health Facility"
+        }
+      },
+      "approx_processing_time": "Immediate",
+      "sources": [
+        { "name": "ABDM – ABHA", "url": "https://abha.abdm.gov.in" }
+      ]
+    },
+    {
+      "task_id": "pmjay_ecard",
+      "title": "Ayushman Bharat (PM-JAY) e-Card",
+      "description": "Check eligibility and generate PM-JAY e-card for health coverage.",
+      "required_documents": [
+        "Aadhaar",
+        "Family details",
+        "Mobile number"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Check eligibility on PM-JAY portal.",
+            "Complete eKYC and generate e-card if eligible."
+          ],
+          "website": "https://pmjay.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit nearest CSC/PM-JAY helpdesk for assisted registration."
+          ],
+          "google_places_keyword": "PM-JAY CSC Center"
+        }
+      },
+      "approx_processing_time": "Immediate to 3 days",
+      "sources": [
+        { "name": "PM-JAY", "url": "https://pmjay.gov.in" }
+      ]
+    },
+    {
+      "task_id": "organ_donor_pledge",
+      "title": "Organ Donor Pledge (NOTTO)",
+      "description": "Pledge to donate organs and receive a donor card.",
+      "required_documents": [
+        "Identity details",
+        "Contact information",
+        "Photograph (optional)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on NOTTO portal.",
+            "Fill pledge form and submit.",
+            "Download donor card."
+          ],
+          "website": "https://notto.mohfw.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Pledge at participating hospitals/NGOs."
+          ],
+          "google_places_keyword": "NOTTO Organ Donation Center"
+        }
+      },
+      "approx_processing_time": "Immediate",
+      "sources": [
+        { "name": "NOTTO", "url": "https://notto.mohfw.gov.in" }
+      ]
+    },
+    {
+      "task_id": "blood_donor_registration",
+      "title": "Blood Donor Registration (eRaktKosh)",
+      "description": "Register as a voluntary blood donor and find donation camps.",
+      "required_documents": [
+        "Identity details",
+        "Contact information",
+        "Basic health info (self-declared)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Create account on eRaktKosh.",
+            "Complete donor profile.",
+            "Book donation slot/camp as available."
+          ],
+          "website": "https://www.eraktkosh.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Register at nearest blood bank."
+          ],
+          "google_places_keyword": "Government Blood Bank"
+        }
+      },
+      "approx_processing_time": "Immediate",
+      "sources": [
+        { "name": "eRaktKosh", "url": "https://www.eraktkosh.in" }
+      ]
+    },
+    {
+      "task_id": "nps_enps_registration",
+      "title": "National Pension System (eNPS) Registration",
+      "description": "Open an NPS account and get PRAN.",
+      "required_documents": [
+        "Aadhaar or PAN",
+        "Bank account details",
+        "Photo and signature (digital)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Go to eNPS portal.",
+            "Choose Aadhaar/PAN-based registration.",
+            "Complete KYC, upload photo/signature, and pay initial contribution."
+          ],
+          "website": "https://enps.nsdl.com"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit Point of Presence (POP) for assisted registration."
+          ],
+          "google_places_keyword": "NPS Point of Presence"
+        }
+      },
+      "approx_processing_time": "Immediate to 2 days",
+      "sources": [
+        { "name": "eNPS (NSDL-CRA)", "url": "https://enps.nsdl.com" }
+      ]
+    },
+    {
+      "task_id": "eshram_registration",
+      "title": "eShram (Unorganized Workers) Registration",
+      "description": "Register unorganized workers for a national database and benefits.",
+      "required_documents": [
+        "Aadhaar (linked mobile preferred)",
+        "Bank account details",
+        "Occupation and personal details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on eShram portal.",
+            "Verify with OTP and fill details.",
+            "Download eShram card."
+          ],
+          "website": "https://eshram.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit nearest CSC for assisted registration."
+          ],
+          "google_places_keyword": "Common Service Center (CSC)"
+        }
+      },
+      "approx_processing_time": "Immediate",
+      "sources": [
+        { "name": "eShram", "url": "https://eshram.gov.in" }
+      ]
+    },
+    {
+      "task_id": "pm_kisan_registration",
+      "title": "PM-KISAN Registration",
+      "description": "Register eligible farmers for PM-KISAN income support.",
+      "required_documents": [
+        "Aadhaar",
+        "Bank account details",
+        "Land ownership/record details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply on PM-KISAN portal as 'New Farmer'.",
+            "Enter Aadhaar, land, and bank details.",
+            "Submit and track status."
+          ],
+          "website": "https://pmkisan.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply via local agriculture office/CSC."
+          ],
+          "google_places_keyword": "Agriculture Department Office"
+        }
+      },
+      "approx_processing_time": "7-20 days",
+      "sources": [
+        { "name": "PM-KISAN", "url": "https://pmkisan.gov.in" }
+      ]
+    },
+    {
+      "task_id": "pmfby_crop_insurance",
+      "title": "PMFBY Crop Insurance Enrollment",
+      "description": "Enroll for Pradhan Mantri Fasal Bima Yojana.",
+      "required_documents": [
+        "Aadhaar",
+        "Land/crop details",
+        "Bank account details",
+        "KYC documents"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on PMFBY portal.",
+            "Select season/crop and upload documents.",
+            "Pay premium and submit."
+          ],
+          "website": "https://pmfby.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Enroll via bank/CSC/Agriculture office."
+          ],
+          "google_places_keyword": "Agriculture Office / CSC"
+        }
+      },
+      "approx_processing_time": "Immediate to 7 days",
+      "sources": [
+        { "name": "PMFBY", "url": "https://pmfby.gov.in" }
+      ]
+    },
+    {
+      "task_id": "police_clearance_certificate_psk",
+      "title": "Police Clearance Certificate (PCC)",
+      "description": "Apply for PCC, typically required for immigration/employment abroad.",
+      "required_documents": [
+        "Passport",
+        "Address proof",
+        "Application form and purpose details",
+        "Recent photograph"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via Passport Seva portal.",
+            "Pay fees and schedule appointment.",
+            "Attend appointment and police verification."
+          ],
+          "website": "https://portal2.passportindia.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "In some states, apply at local police commissioner's office."
+          ],
+          "google_places_keyword": "Police Commissioner's Office"
+        }
+      },
+      "approx_processing_time": "7-20 days",
+      "sources": [
+        { "name": "Passport Seva", "url": "https://portal2.passportindia.gov.in" }
+      ]
+    },
+    {
+      "task_id": "international_driving_permit",
+      "title": "International Driving Permit (IDP)",
+      "description": "Obtain IDP for driving in foreign countries.",
+      "required_documents": [
+        "Valid Indian Driving License",
+        "Passport and visa (if applicable)",
+        "Passport-size photographs",
+        "Medical certificate (if required)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via Parivahan (Sarathi) services.",
+            "Upload documents, pay fees, and book appointment if required.",
+            "Collect IDP from RTO or receive by post."
+          ],
+          "website": "https://parivahan.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply at Regional Transport Office with documents and fee."
+          ],
+          "google_places_keyword": "Regional Transport Office"
+        }
+      },
+      "approx_processing_time": "3-7 days",
+      "sources": [
+        { "name": "Parivahan Sarathi", "url": "https://parivahan.gov.in" }
+      ]
+    },
+    {
+      "task_id": "vehicle_ownership_transfer",
+      "title": "Vehicle Ownership Transfer (RC Transfer)",
+      "description": "Transfer ownership of a motor vehicle to a new owner.",
+      "required_documents": [
+        "Original RC",
+        "Insurance certificate",
+        "PUC certificate",
+        "Buyer/seller ID and address proof",
+        "NOC (if applicable)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Initiate transfer on Vahan portal.",
+            "Upload documents and pay fees.",
+            "Submit vehicle for inspection if called."
+          ],
+          "website": "https://parivahan.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit Forms and documents at RTO.",
+            "Pay fees and collect updated RC."
+          ],
+          "google_places_keyword": "Regional Transport Office"
+        }
+      },
+      "approx_processing_time": "7-15 days",
+      "sources": [
+        { "name": "Vahan (MoRTH)", "url": "https://parivahan.gov.in" }
+      ]
+    },
+    {
+      "task_id": "fastag_purchase_activation",
+      "title": "FASTag Purchase & Activation",
+      "description": "Buy and activate FASTag for electronic toll collection.",
+      "required_documents": [
+        "Vehicle RC",
+        "Owner ID and address proof",
+        "Bank account details (for recharge/auto-debit)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Purchase FASTag via IHMCL/issuer bank portal.",
+            "Upload KYC and vehicle details.",
+            "Activate and link wallet/account."
+          ],
+          "website": "https://fastag.ihmcl.com"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Buy at toll plaza POS or bank branch.",
+            "Provide KYC and vehicle details for activation."
+          ],
+          "google_places_keyword": "FASTag POS / Toll Plaza"
+        }
+      },
+      "approx_processing_time": "Immediate to 2 days",
+      "sources": [
+        { "name": "IHMCL FASTag", "url": "https://fastag.ihmcl.com" }
+      ]
+    },
+    {
+      "task_id": "tan_application",
+      "title": "TAN Application (Tax Deduction Account Number)",
+      "description": "Obtain TAN for entities deducting TDS.",
+      "required_documents": [
+        "PAN of entity",
+        "Address and contact details",
+        "Incorporation/constitution documents (as applicable)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply on NSDL-TIN portal for TAN.",
+            "Fill Form 49B and submit.",
+            "Receive TAN allotment."
+          ],
+          "website": "https://www.tin-nsdl.com"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit physical Form 49B at TIN-FC."
+          ],
+          "google_places_keyword": "TIN Facilitation Center"
+        }
+      },
+      "approx_processing_time": "3-7 days",
+      "sources": [
+        { "name": "NSDL TIN", "url": "https://www.tin-nsdl.com" }
+      ]
+    },
+    {
+      "task_id": "rti_online",
+      "title": "Right to Information (RTI) Online Application",
+      "description": "File RTI to seek information from public authorities.",
+      "required_documents": [
+        "Applicant details",
+        "Information request (clearly drafted)",
+        "Payment of RTI fee"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "File RTI on the RTI Online portal (for participating authorities).",
+            "Pay fee online and submit.",
+            "Track and receive response."
+          ],
+          "website": "https://rtionline.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit RTI application to PIO of the department with fee (IPO/DD)."
+          ],
+          "google_places_keyword": "Public Information Officer Office"
+        }
+      },
+      "approx_processing_time": "30 days (statutory, may vary)",
+      "sources": [
+        { "name": "RTI Online", "url": "https://rtionline.gov.in" }
+      ]
+    },
+    {
+      "task_id": "cpgrams_grievance",
+      "title": "Public Grievance (CPGRAMS) Filing",
+      "description": "Submit grievances to Central/State government departments.",
+      "required_documents": [
+        "Complainant details",
+        "Grievance description and evidence",
+        "Related department/office details (if known)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register/login on CPGRAMS portal.",
+            "File grievance with details and attachments.",
+            "Track status and receive resolution."
+          ],
+          "website": "https://pgportal.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit written grievance to the concerned department’s grievance cell."
+          ],
+          "google_places_keyword": "Government Grievance Cell"
+        }
+      },
+      "approx_processing_time": "15-60 days (varies)",
+      "sources": [
+        { "name": "CPGRAMS", "url": "https://pgportal.gov.in" }
+      ]
+    },
+    {
+      "task_id": "startup_india_recognition",
+      "title": "DPIIT Startup Recognition",
+      "description": "Get recognized as a Startup by DPIIT for benefits and incentives.",
+      "required_documents": [
+        "Incorporation certificate",
+        "Details of innovation/product",
+        "PAN, address, and founder details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on Startup India portal.",
+            "Complete profile and submit recognition application.",
+            "Receive DPIIT recognition certificate on approval."
+          ],
+          "website": "https://www.startupindia.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["Recognition process is online."]
+        }
+      },
+      "approx_processing_time": "7-15 days",
+      "sources": [
+        { "name": "Startup India", "url": "https://www.startupindia.gov.in" }
+      ]
+    },
+    {
+      "task_id": "ngodarpan_registration",
+      "title": "NGO Darpan Registration",
+      "description": "Register NGO/VO with NITI Aayog for scheme participation.",
+      "required_documents": [
+        "Registration deed/trust deed/society certificate",
+        "PAN of NGO",
+        "Office bearer details",
+        "Activities details"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Sign up on NGO Darpan portal.",
+            "Enter organization and key functionary details.",
+            "Submit for NGO ID generation."
+          ],
+          "website": "https://ngodarpan.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["Registration is online on NGO Darpan."]
+        }
+      },
+      "approx_processing_time": "3-10 days",
+      "sources": [
+        { "name": "NGO Darpan", "url": "https://ngodarpan.gov.in" }
+      ]
+    },
+    {
+      "task_id": "fcra_registration",
+      "title": "FCRA Registration (NGOs)",
+      "description": "Register to receive foreign contributions under FCRA.",
+      "required_documents": [
+        "NGO registration documents",
+        "PAN, bank (FCRA) account details",
+        "Key functionaries’ KYC",
+        "Activity reports and bylaws"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply on FCRA online portal.",
+            "Upload documents and pay fees.",
+            "Track inspection/approval."
+          ],
+          "website": "https://fcraonline.nic.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["FCRA applications are processed online."]
+        }
+      },
+      "approx_processing_time": "30-90+ days",
+      "sources": [
+        { "name": "FCRA Online", "url": "https://fcraonline.nic.in" }
+      ]
+    },
+    {
+      "task_id": "iec_modification",
+      "title": "IEC Modification/Update",
+      "description": "Modify existing Importer Exporter Code details.",
+      "required_documents": [
+        "Existing IEC",
+        "Updated address/bank/entity details",
+        "Supporting proofs"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Login to DGFT portal.",
+            "Edit IEC profile and upload proofs.",
+            "Submit and download updated IEC."
+          ],
+          "website": "https://www.dgft.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["IEC modifications are done online."]
+        }
+      },
+      "approx_processing_time": "1-3 days",
+      "sources": [
+        { "name": "DGFT", "url": "https://www.dgft.gov.in" }
+      ]
+    },
+    {
+      "task_id": "mca_roc_annual_filing",
+      "title": "MCA ROC Annual Filing (Companies)",
+      "description": "File annual returns/financials (e.g., AOC-4, MGT-7) with MCA.",
+      "required_documents": [
+        "Audited financial statements",
+        "Board and AGM documents",
+        "Digital Signature Certificates"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Prepare e-forms using MCA utilities.",
+            "Upload forms on MCA portal with DSC.",
+            "Pay fees and download SRN/acknowledgements."
+          ],
+          "website": "https://www.mca.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["ROC filings are online on MCA portal."]
+        }
+      },
+      "approx_processing_time": "Immediate submission; processing varies",
+      "sources": [
+        { "name": "MCA Portal", "url": "https://www.mca.gov.in" }
+      ]
+    },
+    {
+      "task_id": "bis_certification_basic",
+      "title": "BIS Certification (ISI/CRS) – Basic Application",
+      "description": "Apply for BIS certification where mandatory for products.",
+      "required_documents": [
+        "Manufacturer details and license application",
+        "Test reports from BIS-recognized labs",
+        "Product and factory details",
+        "QMS documents (as applicable)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on BIS Manakonline portal.",
+            "Submit application with test reports.",
+            "Schedule inspection if required and obtain license."
+          ],
+          "website": "https://www.manakonline.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit application at BIS branch office with documents."
+          ],
+          "google_places_keyword": "BIS Branch Office"
+        }
+      },
+      "approx_processing_time": "30-90+ days (varies)",
+      "sources": [
+        { "name": "BIS Manakonline", "url": "https://www.manakonline.in" }
+      ]
+    },
+    {
+      "task_id": "building_plan_approval",
+      "title": "Building Plan Approval (Urban Local Body)",
+      "description": "Get municipal approval for building plans before construction.",
+      "required_documents": [
+        "Ownership/title documents",
+        "Architectural plans and drawings",
+        "Soil/structural reports (as required)",
+        "NOCs (fire, environment, etc., if applicable)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via city’s online building plan approval system.",
+            "Upload plans and pay scrutiny fees.",
+            "Respond to queries and obtain approval."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit plans at municipal town planning department.",
+            "Attend site inspections and collect approval."
+          ],
+          "google_places_keyword": "Municipal Town Planning Office"
+        }
+      },
+      "approx_processing_time": "15-60 days (varies)",
+      "sources": [
+        { "name": "City ULB Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "fire_noc_commercial",
+      "title": "Fire NOC (Commercial Establishments)",
+      "description": "Obtain Fire Safety NOC for commercial buildings/establishments.",
+      "required_documents": [
+        "Building plan and layout",
+        "Ownership/occupancy proof",
+        "Fire safety equipment details",
+        "Compliance certificates"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply on the state fire services portal (if available).",
+            "Upload plans and compliance details.",
+            "Schedule inspection and receive NOC."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Apply at District Fire Office with plans.",
+            "Facilitate site inspection and collect NOC."
+          ],
+          "google_places_keyword": "District Fire Service Office"
+        }
+      },
+      "approx_processing_time": "15-30 days",
+      "sources": [
+        { "name": "State Fire Services", "url": "" }
+      ]
+    },
+    {
+      "task_id": "pollution_consent_cto_cte",
+      "title": "Pollution Control Consent (CTE/CTO)",
+      "description": "Obtain Consent to Establish/Operate from State Pollution Control Board.",
+      "required_documents": [
+        "Industry details and layout",
+        "Effluent/Emission treatment plans",
+        "Environmental management details",
+        "Previous approvals (if any)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Apply via state SPCB online portal.",
+            "Upload documents and pay fees.",
+            "Facilitate inspection and receive consent order."
+          ],
+          "website": ""
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Submit application at SPCB office with documents."
+          ],
+          "google_places_keyword": "State Pollution Control Board Office"
+        }
+      },
+      "approx_processing_time": "15-45 days",
+      "sources": [
+        { "name": "State PCB Portal", "url": "" }
+      ]
+    },
+    {
+      "task_id": "digilocker_account",
+      "title": "DigiLocker Account Creation",
+      "description": "Create DigiLocker to access and store digital documents issued by government.",
+      "required_documents": [
+        "Mobile number",
+        "Aadhaar (for eKYC linking, optional)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Sign up on DigiLocker portal/app.",
+            "Verify mobile and optionally link Aadhaar.",
+            "Fetch government-issued documents."
+          ],
+          "website": "https://digilocker.gov.in"
+        },
+        "offline": {
+          "available": false,
+          "steps": ["DigiLocker signup is online."]
+        }
+      },
+      "approx_processing_time": "Immediate",
+      "sources": [
+        { "name": "DigiLocker", "url": "https://digilocker.gov.in" }
+      ]
+    },
+    {
+      "task_id": "esanad_apostille",
+      "title": "e-Sanad Document Attestation/Apostille",
+      "description": "Online attestation/apostille of personal/educational documents.",
+      "required_documents": [
+        "Scanned documents",
+        "Applicant ID details",
+        "Payment of fee"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Register on e-Sanad portal.",
+            "Upload documents and pay fees.",
+            "Download attested/apostilled documents when ready."
+          ],
+          "website": "https://esanad.nic.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Use designated collection centers if required."
+          ],
+          "google_places_keyword": "Document Attestation Center"
+        }
+      },
+      "approx_processing_time": "3-10 days",
+      "sources": [
+        { "name": "e-Sanad (MEA)", "url": "https://esanad.nic.in" }
+      ]
+    },
+    {
+      "task_id": "ncs_jobseeker_registration",
+      "title": "National Career Service (NCS) Jobseeker Registration",
+      "description": "Register on NCS portal for job search and career services.",
+      "required_documents": [
+        "ID details",
+        "Education/skills information",
+        "Resume (optional)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Create account on NCS portal.",
+            "Complete profile and preferences.",
+            "Search/apply for jobs and training."
+          ],
+          "website": "https://www.ncs.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Register at Employment Exchange/NCS center."
+          ],
+          "google_places_keyword": "Employment Exchange Office"
+        }
+      },
+      "approx_processing_time": "Immediate",
+      "sources": [
+        { "name": "NCS", "url": "https://www.ncs.gov.in" }
+      ]
+    },
+    {
+      "task_id": "apprentice",
+      "title": "Apprenticesship_napship Registration (NAPS)",
+      "description": "Register as apprentice or employer under National Apprenticeship Promotion Scheme.",
+      "required_documents": [
+        "Aadhaar",
+        "Education certificates",
+        "Bank details",
+        "Employer establishment details (for employers)"
+      ],
+      "application_mode": {
+        "online": {
+          "available": true,
+          "steps": [
+            "Sign up on Apprenticeship India portal.",
+            "Complete profile and KYC.",
+            "Apply for apprenticeships or post opportunities."
+          ],
+          "website": "https://www.apprenticeshipindia.gov.in"
+        },
+        "offline": {
+          "available": true,
+          "steps": [
+            "Visit ITI/skill centers for assisted registration."
+          ],
+          "google_places_keyword": "ITI Training Center"
+        }
+      },
+      "approx_processing_time": "Immediate to 7 days",
+      "sources": [
+        { "name": "Apprenticeship India (NAPS)", "url": "https://www.apprenticeshipindia.gov.in" }
+      ]
+    },
+    {
+  "task_id": "indian_railways_parcel_luggage_transport",
+  "title": "Indian Railways Parcel and Luggage Transport",
+  "description": "Transport personal or commercial items legally via Indian Railways by booking them as luggage (with passenger) or parcel (without passenger).",
+  "required_documents": [
+    "Valid ID proof of sender",
+    "Train ticket (for luggage booking)",
+    "Invoice or goods declaration (for commercial parcels)"
+  ],
+  "application_mode": {
+    "online": {
+      "available": true,
+      "steps": [
+        "Visit Indian Railways Parcel Management System (PMS) website.",
+        "Register and provide sender/receiver details.",
+        "Enter parcel/luggage details and generate booking request.",
+        "Pay charges online and obtain Railway Receipt (RR).",
+        "Track status online until delivery."
+      ],
+      "website": "https://parcel.indianrail.gov.in"
+    },
+    "offline": {
+      "available": true,
+      "steps": [
+        "Visit the Luggage/Parcel Office at the railway station.",
+        "Pack goods securely as per railway rules.",
+        "Submit booking form with ID proof (and train ticket for luggage).",
+        "Pay charges and receive Luggage Receipt (LR) or Railway Receipt (RR).",
+        "Collect goods at destination parcel office using receipt and ID."
+      ],
+      "google_places_keyword": "Indian Railways Parcel Office"
+    }
+  },
+  "approx_processing_time": "Same day (depending on train schedule)",
+  "sources": [
+    { "name": "Indian Railways Parcel Booking", "url": "https://parcel.indianrail.gov.in" }
+  ]
+}
+  ]
+}

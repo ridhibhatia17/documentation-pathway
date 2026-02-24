@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ task.title }} - Legal Task Portal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='style.css') }}"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --surface: #111827;
+        --text: #e5e7eb;
+        --primary: #22d3ee;
+        --accent: #f59e0b;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+      }
+
+      .main-container {
+        background: rgba(17, 24, 39, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 18px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        margin: 2rem auto;
+        max-width: 1100px;
+        overflow: hidden;
+      }
+
+      .header {
+        background: var(--surface);
+        color: var(--text);
+        padding: 1.25rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .back-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: var(--text);
+        border-radius: 12px;
+        padding: 0.5rem 0.9rem;
+        text-decoration: none;
+        transition: transform 0.18s ease, background-color 0.18s ease,
+          border-color 0.18s ease;
+      }
+      .back-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(34, 211, 238, 0.5);
+        transform: translateY(-1px);
+        color: var(--text);
+      }
+      .processing-time {
+        background: rgba(245, 158, 11, 0.12);
+        color: var(--accent);
+        padding: 0.6rem 0.9rem;
+        border-radius: 12px;
+        border: 1px solid rgba(245, 158, 11, 0.35);
+        font-weight: 600;
+      }
+
+      .info-card {
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        margin-bottom: 1.25rem;
+        overflow: hidden;
+      }
+      .card-header {
+        background: linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.04)
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 1rem 1.25rem;
+      }
+      .card-header h3 {
+        margin: 0;
+        font-weight: 700;
+        font-size: 1.1rem;
+      }
+
+      /* Timeline + steps */
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+        margin-top: 0.25rem;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 0.95rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: rgba(229, 231, 235, 0.12);
+      }
+      .step-item {
+        padding: 0.9rem 1rem;
+        margin-bottom: 0.6rem;
+        background: #0f1621;
+        border-left: 4px solid var(--primary);
+        border-radius: 0 10px 10px 0;
+        transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1),
+          background-color 0.7s cubic-bezier(0.4, 0.2, 0.2, 1),
+          box-shadow 0.7s cubic-bezier(0.4, 0.2, 0.2, 1),
+          opacity 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        /* allow per-step delay for sequential reveal */
+        transition-delay: var(--delay, 0s);
+        position: relative;
+        transform: translateY(12px);
+        opacity: 0;
+      }
+      /* add timeline dots for clearer step flow */
+      .step-item::before {
+        content: "";
+        position: absolute;
+        left: -1.1rem;
+        top: 1rem;
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--primary);
+        box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15);
+      }
+      .step-item.in-view {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .step-item.active {
+        background: rgba(34, 211, 238, 0.1);
+        box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.25) inset,
+          0 12px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      .doc-item {
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.6rem;
+        background: rgba(245, 158, 11, 0.12);
+        border: 1px solid rgba(245, 158, 11, 0.35);
+        color: var(--text);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .status-badge {
+        font-size: 0.9rem;
+        padding: 0.45rem 0.8rem;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+      .available {
+        background: rgba(34, 211, 238, 0.15);
+        border: 1px solid rgba(34, 211, 238, 0.45);
+        color: var(--primary);
+      }
+      .not-available {
+        background: rgba(245, 158, 11, 0.15);
+        border: 1px solid rgba(245, 158, 11, 0.45);
+        color: var(--accent);
+      }
+
+      .apply-btn {
+        background: var(--primary);
+        border: none;
+        border-radius: 12px;
+        padding: 0.9rem 1.2rem;
+        color: #001419;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-block;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .apply-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px rgba(34, 211, 238, 0.25);
+        color: #001419;
+        text-decoration: none;
+      }
+
+      .muted {
+        color: rgba(229, 231, 235, 0.65);
+      }
+
+      .source-link {
+        display: block;
+        padding: 0.9rem 1rem;
+        border-radius: 10px;
+        background: #0f1621;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--text);
+        text-decoration: none;
+        transition: border-color 0.15s ease, transform 0.15s ease;
+      }
+      .source-link:hover {
+        border-color: rgba(34, 211, 238, 0.5);
+        transform: translateY(-1px);
+      }
+
+      .chart-wrap {
+        padding: 1rem;
+      }
+      canvas {
+        max-height: 260px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-container">
+        <div class="header">
+          <div
+            class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-3"
+          >
+            <a href="/" class="back-btn">
+              <i class="fas fa-arrow-left me-2"></i>Back
+            </a>
+            <div class="processing-time">
+              <i class="fas fa-clock me-2"></i>
+              Processing Time: {{ task.approx_processing_time }}
+            </div>
+          </div>
+          <h1 class="h3 mb-1">
+            <i class="fas fa-file-alt me-2 text-info"></i>{{ task.title }}
+          </h1>
+          <p class="mb-0 muted">{{ task.description }}</p>
+        </div>
+
+        <div class="p-4">
+          <!-- Insights: Dark charts show at-a-glance data -->
+          <div class="info-card mb-4">
+            <div
+              class="card-header d-flex align-items-center justify-content-between"
+            >
+              <h3 class="mb-0">
+                <i class="fas fa-chart-simple me-2 text-info"></i>Insights
+              </h3>
+              <span class="muted small">Interactive charts</span>
+            </div>
+            <div class="chart-wrap">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="bg-transparent border-0">
+                    <h6 class="muted mb-2">
+                      <i class="fa-solid fa-bars-staggered me-2"></i>Steps
+                      Comparison
+                    </h6>
+                    <canvas id="stepsChart"></canvas>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="bg-transparent border-0">
+                    <h6 class="muted mb-2">
+                      <i class="fa-solid fa-toggle-on me-2"></i>Mode
+                      Availability
+                    </h6>
+                    <canvas id="availabilityChart"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="row g-3 mt-2">
+                <div class="col-12">
+                  <div class="bg-transparent border-0">
+                    <h6 class="muted mb-2">
+                      <i class="fa-regular fa-clock me-2"></i>Estimated
+                      Processing (days)
+                    </h6>
+                    <canvas id="timelineChart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Required Documents -->
+          <div class="info-card">
+            <div class="card-header">
+              <h3 class="mb-0">
+                <i class="fas fa-clipboard-list me-2 text-warning"></i>
+                Required Documents
+              </h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                {% for doc in task.required_documents %}
+                <div class="col-md-6">
+                  <div class="doc-item">
+                    <i class="fas fa-file-text me-3 text-warning"></i>
+                    {{ doc }}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          <!-- Application Methods -->
+          <div class="row">
+            <!-- Online Application -->
+            <div class="col-lg-6">
+              <div class="info-card h-100">
+                <div
+                  class="card-header d-flex justify-content-between align-items-center"
+                >
+                  <h3 class="mb-0">
+                    <i class="fas fa-laptop me-2 text-info"></i>
+                    Online Application
+                  </h3>
+                  {% if task.application_mode.online.available %}
+                  <span class="status-badge available">
+                    <i class="fas fa-check-circle me-1"></i>Available
+                  </span>
+                  {% else %}
+                  <span class="status-badge not-available">
+                    <i class="fas fa-times-circle me-1"></i>Not Available
+                  </span>
+                  {% endif %}
+                </div>
+                <div class="card-body">
+                  {% if task.application_mode.online.available %}
+                  <h5 class="mb-3">Steps to Follow:</h5>
+                  <div class="timeline" id="online-timeline">
+                    {% for step in task.application_mode.online.steps %}
+                    <div class="step-item">
+                      <strong>Step {{ loop.index }}:</strong> {{ step }}
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% if task.application_mode.online.website %}
+                  <div class="text-center mt-4">
+                    <a
+                      href="{{ task.application_mode.online.website }}"
+                      target="_blank"
+                      class="apply-btn"
+                    >
+                      <i class="fas fa-external-link-alt me-2"></i>Apply Online
+                    </a>
+                  </div>
+                  {% endif %} {% else %}
+                  <p class="text-center muted py-3">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Online
+                    application is not available for this service.
+                  </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Offline Application -->
+            <div class="col-lg-6">
+              <div class="info-card h-100">
+                <div
+                  class="card-header d-flex justify-content-between align-items-center"
+                >
+                  <h3 class="mb-0">
+                    <i
+                      class="fas fa-building me-2"
+                      style="color: var(--accent)"
+                    ></i>
+                    Offline Application
+                  </h3>
+                  {% if task.application_mode.offline.available %}
+                  <span class="status-badge available">
+                    <i class="fas fa-check-circle me-1"></i>Available
+                  </span>
+                  {% else %}
+                  <span class="status-badge not-available">
+                    <i class="fas fa-times-circle me-1"></i>Not Available
+                  </span>
+                  {% endif %}
+                </div>
+                <div class="card-body">
+                  {% if task.application_mode.offline.available %}
+                  <h5 class="mb-3">Steps to Follow:</h5>
+                  <div class="timeline" id="offline-timeline">
+                    {% for step in task.application_mode.offline.steps %}
+                    <div class="step-item">
+                      <strong>Step {{ loop.index }}:</strong> {{ step }}
+                    </div>
+                    {% endfor %}
+                  </div>
+
+                  {% if task.application_mode.offline.google_places_keyword %}
+                  <div
+                    class="mt-4 p-4"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        rgba(15, 22, 33, 0.9) 0%,
+                        rgba(17, 24, 39, 0.8) 100%
+                      );
+                      border: 1px solid rgba(34, 211, 238, 0.2);
+                      border-radius: 16px;
+                      backdrop-filter: blur(8px);
+                      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+                    "
+                  >
+                    <div class="d-flex align-items-center mb-3">
+                      <div
+                        class="d-flex align-items-center justify-content-center me-3"
+                        style="
+                          width: 40px;
+                          height: 40px;
+                          background: rgba(34, 211, 238, 0.15);
+                          border-radius: 12px;
+                          border: 1px solid rgba(34, 211, 238, 0.3);
+                        "
+                      >
+                        <i
+                          class="fas fa-map-marker-alt"
+                          style="color: var(--primary); font-size: 18px"
+                        ></i>
+                      </div>
+                      <div>
+                        <h6
+                          class="mb-1"
+                          style="color: var(--primary); font-weight: 700"
+                        >
+                          Find Nearby Centers
+                        </h6>
+                        <p class="mb-0 muted small">
+                          Search for "{{
+                          task.application_mode.offline.google_places_keyword
+                          }}" near your location
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Location Input Methods -->
+                    <div class="row g-3 mb-3">
+                      <div class="col-md-8">
+                        <div class="position-relative">
+                          <i
+                            class="fas fa-city position-absolute"
+                            style="
+                              left: 12px;
+                              top: 50%;
+                              transform: translateY(-50%);
+                              color: rgba(229, 231, 235, 0.5);
+                              font-size: 14px;
+                            "
+                          ></i>
+                          <input
+                            type="text"
+                            class="form-control ps-5"
+                            id="city-name"
+                            placeholder="Enter city name (e.g., Delhi, Mumbai, Bharatpur)"
+                            style="
+                              background: rgba(15, 22, 33, 0.8);
+                              border: 1px solid rgba(255, 255, 255, 0.12);
+                              border-radius: 12px;
+                              color: var(--text);
+                              padding: 12px 16px 12px 40px;
+                              font-size: 14px;
+                              transition: all 0.3s ease;
+                            "
+                            onkeypress="if(event.key==='Enter') findNearbyCenterByCity('{{ task.application_mode.offline.google_places_keyword }}')"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-4 d-grid">
+                        <button
+                          class="btn d-flex align-items-center justify-content-center"
+                          style="
+                            background: rgba(34, 211, 238, 0.15);
+                            border: 1px solid rgba(34, 211, 238, 0.4);
+                            color: var(--primary);
+                            border-radius: 12px;
+                            padding: 12px 16px;
+                            font-weight: 600;
+                            transition: all 0.3s ease;
+                          "
+                          onmouseover="this.style.background='rgba(34, 211, 238, 0.25)'; this.style.borderColor='rgba(34, 211, 238, 0.6)'"
+                          onmouseout="this.style.background='rgba(34, 211, 238, 0.15)'; this.style.borderColor='rgba(34, 211, 238, 0.4)'"
+                          onclick="findNearbyCenterByCity('{{ task.application_mode.offline.google_places_keyword }}')"
+                        >
+                          <i class="fas fa-search me-2"></i>Search City
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <div
+                        class="d-inline-flex align-items-center justify-content-center mb-2"
+                        style="color: rgba(229, 231, 235, 0.4); font-size: 12px"
+                      >
+                        <div
+                          style="
+                            height: 1px;
+                            width: 60px;
+                            background: rgba(229, 231, 235, 0.2);
+                          "
+                        ></div>
+                        <span class="mx-3">OR</span>
+                        <div
+                          style="
+                            height: 1px;
+                            width: 60px;
+                            background: rgba(229, 231, 235, 0.2);
+                          "
+                        ></div>
+                      </div>
+                      <button
+                        class="btn d-flex align-items-center justify-content-center mx-auto"
+                        style="
+                          background: linear-gradient(
+                            135deg,
+                            rgba(245, 158, 11, 0.15) 0%,
+                            rgba(245, 158, 11, 0.25) 100%
+                          );
+                          border: 1px solid rgba(245, 158, 11, 0.4);
+                          color: var(--accent);
+                          border-radius: 12px;
+                          padding: 12px 24px;
+                          font-weight: 600;
+                          transition: all 0.3s ease;
+                          box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+                        "
+                        onmouseover="this.style.background='linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0.35) 100%)'; this.style.borderColor='rgba(245, 158, 11, 0.6)'; this.style.transform='translateY(-2px)'"
+                        onmouseout="this.style.background='linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.25) 100%)'; this.style.borderColor='rgba(245, 158, 11, 0.4)'; this.style.transform='translateY(0px)'"
+                        onclick="findNearbyCenter('{{ task.application_mode.offline.google_places_keyword }}')"
+                      >
+                        <i class="fas fa-crosshairs me-2"></i>Use My Current
+                        Location
+                      </button>
+                    </div>
+
+                    <!-- Results and Status Display -->
+                    <div
+                      id="location-result"
+                      class="mt-4"
+                      style="display: none"
+                    >
+                      <div
+                        style="
+                          background: linear-gradient(
+                            135deg,
+                            rgba(34, 211, 238, 0.1) 0%,
+                            rgba(34, 211, 238, 0.05) 100%
+                          );
+                          border: 1px solid rgba(34, 211, 238, 0.3);
+                          border-radius: 14px;
+                          padding: 20px;
+                          backdrop-filter: blur(8px);
+                        "
+                      >
+                        <div class="d-flex align-items-start">
+                          <div
+                            class="d-flex align-items-center justify-content-center me-3"
+                            style="
+                              width: 36px;
+                              height: 36px;
+                              background: rgba(34, 211, 238, 0.2);
+                              border-radius: 10px;
+                              flex-shrink: 0;
+                            "
+                          >
+                            <i
+                              class="fas fa-map-marker-alt"
+                              style="color: var(--primary); font-size: 16px"
+                            ></i>
+                          </div>
+                          <div class="flex-grow-1">
+                            <h6
+                              class="mb-2"
+                              style="color: var(--primary); font-weight: 700"
+                            >
+                              Nearest Center Found
+                            </h6>
+                            <div
+                              id="center-name"
+                              class="fw-bold mb-1"
+                              style="color: var(--text); font-size: 16px"
+                            ></div>
+                            <div
+                              id="center-address"
+                              class="mb-3"
+                              style="
+                                color: rgba(229, 231, 235, 0.7);
+                                font-size: 14px;
+                                line-height: 1.4;
+                              "
+                            ></div>
+                            <button
+                              class="btn d-inline-flex align-items-center"
+                              id="directions-btn"
+                              style="
+                                background: var(--primary);
+                                border: none;
+                                color: #001419;
+                                border-radius: 10px;
+                                padding: 10px 16px;
+                                font-weight: 600;
+                                font-size: 14px;
+                                transition: all 0.3s ease;
+                                display: none;
+                              "
+                              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(34, 211, 238, 0.3)'"
+                              onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='none'"
+                            >
+                              <i class="fas fa-directions me-2"></i>Get
+                              Directions
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div id="location-error" class="mt-4" style="display: none">
+                      <div
+                        style="
+                          background: linear-gradient(
+                            135deg,
+                            rgba(245, 158, 11, 0.1) 0%,
+                            rgba(245, 158, 11, 0.05) 100%
+                          );
+                          border: 1px solid rgba(245, 158, 11, 0.3);
+                          border-radius: 14px;
+                          padding: 20px;
+                          backdrop-filter: blur(8px);
+                        "
+                      >
+                        <div class="d-flex align-items-start">
+                          <div
+                            class="d-flex align-items-center justify-content-center me-3"
+                            style="
+                              width: 36px;
+                              height: 36px;
+                              background: rgba(245, 158, 11, 0.2);
+                              border-radius: 10px;
+                              flex-shrink: 0;
+                            "
+                          >
+                            <i
+                              class="fas fa-exclamation-triangle"
+                              style="color: var(--accent); font-size: 16px"
+                            ></i>
+                          </div>
+                          <div>
+                            <h6
+                              class="mb-2"
+                              style="color: var(--accent); font-weight: 700"
+                            >
+                              Unable to Find Centers
+                            </h6>
+                            <span
+                              id="error-message"
+                              style="
+                                color: rgba(229, 231, 235, 0.8);
+                                font-size: 14px;
+                                line-height: 1.4;
+                              "
+                            ></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      id="location-loading"
+                      class="mt-4"
+                      style="display: none"
+                    >
+                      <div
+                        style="
+                          background: linear-gradient(
+                            135deg,
+                            rgba(17, 24, 39, 0.8) 0%,
+                            rgba(15, 22, 33, 0.9) 100%
+                          );
+                          border: 1px solid rgba(34, 211, 238, 0.2);
+                          border-radius: 14px;
+                          padding: 20px;
+                          backdrop-filter: blur(8px);
+                        "
+                      >
+                        <div
+                          class="d-flex align-items-center justify-content-center"
+                        >
+                          <div class="d-flex align-items-center">
+                            <div
+                              class="spinner-border me-3"
+                              style="
+                                width: 24px;
+                                height: 24px;
+                                color: var(--primary);
+                                border-width: 2px;
+                              "
+                              role="status"
+                            ></div>
+                            <span
+                              style="color: var(--primary); font-weight: 600"
+                              >Searching for nearby centers...</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %} {% else %}
+                  <p class="text-center muted py-3">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Offline
+                    application is not available for this service.
+                  </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+      const onlineAvailable = {{ 1 if task.application_mode.online.available else 0 }};
+      const offlineAvailable = {{ 1 if task.application_mode.offline.available else 0 }};
+      const onlineSteps = {{ (task.application_mode.online.steps | length) if task.application_mode.online.available else 0 }};
+      const offlineSteps = {{ (task.application_mode.offline.steps | length) if task.application_mode.offline.available else 0 }};
+      const processingText = "{{ task.approx_processing_time | e }}";
+
+      const processingDays = (() => {
+        try {
+          const match = processingText.match(/(\d+)\s*(day|days|d)\b/i) || processingText.match(/(\d+)\s*(week|weeks|w)\b/i);
+          if (!match) return 0;
+          const val = parseInt(match[1], 10);
+          if (isNaN(val)) return 0;
+          const unit = match[2].toLowerCase();
+          return unit.startsWith('week') || unit === 'w' ? val * 7 : val;
+        } catch { return 0; }
+      })();
+
+      const hideEl = (el) => { if (el) el.style.display = 'none'; };
+
+      const stepsCtx = document.getElementById('stepsChart').getContext('2d');
+      const stepsChartContainer = stepsCtx.canvas.closest('.col-md-6');
+      const availCtx = document.getElementById('availabilityChart').getContext('2d');
+      const availChartContainer = availCtx.canvas.closest('.col-md-6');
+      const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+      const timelineChartContainer = timelineCtx.canvas.closest('.col-12');
+
+      if ((onlineSteps + offlineSteps) === 0) {
+        hideEl(stepsChartContainer);
+      } else {
+        Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue('--text') || '#e5e7eb';
+        const gridColor = 'rgba(229,231,235,0.15)';
+        new Chart(stepsCtx, {
+          type: 'bar',
+          data: {
+            labels: ['Online', 'Offline'],
+            datasets: [{
+              label: 'Number of steps',
+              data: [onlineSteps, offlineSteps],
+              backgroundColor: ['rgba(34,211,238,0.35)', 'rgba(245,158,11,0.35)'],
+              borderColor: ['rgba(34,211,238,0.8)', 'rgba(245,158,11,0.8)'],
+              borderWidth: 1.5,
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: { grid: { color: gridColor } },
+              y: { beginAtZero: true, grid: { color: gridColor } }
+            },
+            plugins: {
+              legend: { labels: { boxWidth: 12 } },
+              tooltip: { mode: 'index', intersect: false }
+            }
+          }
+        });
+      }
+
+      if ((onlineAvailable + offlineAvailable) === 0) {
+        hideEl(availChartContainer);
+      } else {
+        new Chart(availCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Online Available', 'Offline Available'],
+            datasets: [{
+              data: [onlineAvailable, offlineAvailable],
+              backgroundColor: ['rgba(34,211,238,0.35)', 'rgba(245,158,11,0.35)'],
+              borderColor: ['rgba(34,211,238,0.8)', 'rgba(245,158,11,0.8)'],
+              borderWidth: 1.5
+            }]
+          },
+          options: {
+            responsive: true,
+            cutout: '55%',
+            plugins: {
+              legend: { position: 'bottom', labels: { boxWidth: 12 } }
+            }
+          }
+        });
+      }
+
+      if (processingDays === 0) {
+        hideEl(timelineChartContainer);
+      } else {
+        const gridColor = 'rgba(229,231,235,0.15)';
+        new Chart(timelineCtx, {
+          type: 'bar',
+          data: {
+            labels: ['Estimated'],
+            datasets: [{
+              label: 'Days',
+              data: [processingDays],
+              backgroundColor: 'rgba(34,211,238,0.35)',
+              borderColor: 'rgba(34,211,238,0.8)',
+              borderWidth: 1.5,
+              borderRadius: 6
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            scales: {
+              x: { beginAtZero: true, grid: { color: gridColor } },
+              y: { grid: { color: gridColor } }
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: { callbacks: { label: (ctx) => `${ctx.parsed.x} days` } }
+            }
+          }
+        });
+      }
+
+      // Geolocation helpers remain unchanged (functions defined in script.js or above)
+      let userLocation = null;
+
+      function findNearbyCenter(keyword) {
+        const loadingDiv = document.getElementById("location-loading");
+        const resultDiv = document.getElementById("location-result");
+        const errorDiv = document.getElementById("location-error");
+
+        resultDiv.style.display = "none";
+        errorDiv.style.display = "none";
+        loadingDiv.style.display = "block";
+
+        if (!navigator.geolocation) {
+          showLocationError("Geolocation is not supported by this browser.");
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            userLocation = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+            };
+
+            // Debug: Show actual coordinates
+            console.log("📍 Debug Location Info:");
+            console.log("Latitude:", position.coords.latitude);
+            console.log("Longitude:", position.coords.longitude);
+            console.log("Accuracy:", position.coords.accuracy + " meters");
+
+            // Show coordinates to user temporarily for debugging
+            const debugDiv = document.createElement('div');
+            debugDiv.innerHTML = `
+              <div class="alert alert-info mt-2" style="background: rgba(34, 211, 238, 0.1); border: 1px solid rgba(34, 211, 238, 0.3); color: var(--primary); font-size: 12px;">
+                <strong>🔍 Debug:</strong> Detected coordinates: ${position.coords.latitude.toFixed(6)}, ${position.coords.longitude.toFixed(6)}
+                (Accuracy: ±${Math.round(position.coords.accuracy)}m)
+              </div>
+            `;
+            document.getElementById("location-loading").appendChild(debugDiv);
+
+            searchNearbyCenter(keyword, userLocation);
+          },
+          function (error) {
+            let errorMessage = "Unable to get your location. ";
+            switch (error.code) {
+              case error.PERMISSION_DENIED:
+                errorMessage += "Please allow location access and try again.";
+                break;
+              case error.POSITION_UNAVAILABLE:
+                errorMessage += "Location information is unavailable.";
+                break;
+              case error.TIMEOUT:
+                errorMessage += "Location request timed out.";
+                break;
+              default:
+                errorMessage += "An unknown error occurred.";
+                break;
+            }
+            showLocationError(errorMessage);
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+        );
+      }
+
+      function searchNearbyCenter(keyword, location) {
+        fetch("/find_centers", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            keyword,
+            latitude: location.latitude,
+            longitude: location.longitude,
+            radius: 5000,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            document.getElementById("location-loading").style.display = "none";
+            if (data.success) {
+              showLocationResult(data.center, location);
+            } else {
+              showLocationError(data.message || "No centers found nearby.");
+            }
+          })
+          .catch((error) => {
+            document.getElementById("location-loading").style.display = "none";
+            showLocationError("Error searching for centers. Please check your internet connection.");
+            console.error("Error:", error);
+          });
+      }
+
+      function showLocationResult(center, userLoc) {
+        const resultDiv = document.getElementById("location-result");
+        const nameDiv = document.getElementById("center-name");
+        const addressDiv = document.getElementById("center-address");
+        const directionsBtn = document.getElementById("directions-btn");
+
+        nameDiv.textContent = center.name;
+        addressDiv.textContent = center.address;
+
+        directionsBtn.style.display = "inline-block";
+        directionsBtn.onclick = function () {
+          const directionsUrl = `https://www.google.com/maps/dir/${userLoc.latitude},${userLoc.longitude}/${encodeURIComponent(center.address)}`;
+          window.open(directionsUrl, "_blank");
+        };
+
+        resultDiv.style.display = "block";
+      }
+
+      function showLocationError(message) {
+        const errorDiv = document.getElementById("location-error");
+        const errorMessage = document.getElementById("error-message");
+        document.getElementById("location-loading").style.display = "none";
+        errorMessage.textContent = message;
+        errorDiv.style.display = "block";
+      }
+
+      function findNearbyCenterByCity(keyword) {
+        const cityInput = document.getElementById("city-name");
+        const city = cityInput.value.trim();
+        if (!city) {
+          showLocationError("Please enter a city name.");
+          return;
+        }
+        const loadingDiv = document.getElementById("location-loading");
+        const resultDiv = document.getElementById("location-result");
+        const errorDiv = document.getElementById("location-error");
+        resultDiv.style.display = "none";
+        errorDiv.style.display = "none";
+        loadingDiv.style.display = "block";
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}`)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data && data.length > 0) {
+              const latitude = parseFloat(data[0].lat);
+              const longitude = parseFloat(data[0].lon);
+              searchNearbyCenter(keyword, { latitude, longitude });
+            } else {
+              loadingDiv.style.display = "none";
+              showLocationError("City not found. Please check the spelling or try another city.");
+            }
+          })
+          .catch((error) => {
+            loadingDiv.style.display = "none";
+            showLocationError("Error fetching city location. Please check your internet connection.");
+            console.error("Error:", error);
+          });
+      }
+
+      // Animate steps on scroll (reveal + active highlight)
+      (function () {
+        const lists = [document.getElementById('online-timeline'), document.getElementById('offline-timeline')].filter(Boolean);
+
+        const revealSequentially = (list) => {
+          const steps = Array.from(list.querySelectorAll('.step-item'));
+          if (!steps.length) return;
+
+          // Assign per-step transition delays for a cascading effect
+          steps.forEach((s, idx) => {
+            s.style.setProperty('--delay', `${Math.min(idx * 250, 2000)}ms`);
+          });
+
+          // Start reveal when the list enters the viewport the first time
+          const startReveal = () => {
+            steps.forEach(s => s.classList.add('in-view'));
+          };
+
+          if ('IntersectionObserver' in window) {
+            const once = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  startReveal();
+                  once.disconnect();
+                }
+              });
+            }, { threshold: 0.15 });
+            once.observe(list);
+          } else {
+            startReveal();
+          }
+
+          // Active highlight based on proximity to viewport center
+          const setActive = () => {
+            const viewportMid = window.scrollY + window.innerHeight / 2;
+            let best = null;
+            let bestDist = Infinity;
+            steps.forEach(step => {
+              const rect = step.getBoundingClientRect();
+              const stepMid = window.scrollY + rect.top + rect.height / 2;
+              const dist = Math.abs(stepMid - viewportMid);
+              if (dist < bestDist) { best = step; bestDist = dist; }
+            });
+            steps.forEach(s => s.classList.toggle('active', s === best));
+          };
+
+          setActive();
+          window.addEventListener('scroll', setActive, { passive: true });
+          window.addEventListener('resize', setActive);
+        };
+
+        lists.forEach(revealSequentially);
+      })();
+    </script>
+  </body>
+</html>

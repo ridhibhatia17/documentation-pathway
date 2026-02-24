@@ -1,0 +1,117 @@
+/* Additional Custom Styles for Legal Task Portal */
+
+.hover-effect:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.step-item::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    background: #667eea;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.steps-container {
+    counter-reset: step-counter;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .main-container {
+        margin: 1rem;
+        border-radius: 15px;
+    }
+    
+    .header {
+        padding: 1.5rem;
+    }
+    
+    .search-section {
+        padding: 1rem;
+    }
+    
+    .processing-time {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .task-card {
+        margin-bottom: 1rem;
+    }
+    
+    .search-box {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .search-btn {
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+/* Loading animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+.task-card:focus,
+.search-box:focus,
+.search-btn:focus,
+.apply-btn:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .search-section,
+    .back-btn {
+        display: none;
+    }
+    
+    body {
+        background: white;
+    }
+    
+    .main-container {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
