@@ -2,6 +2,7 @@ import json
 import requests
 import os
 from dotenv import load_dotenv
+import math
 
 # Load environment variables from .env
 load_dotenv()
@@ -88,8 +89,63 @@ def find_nearest_offline_center(keyword, user_location, radius=5000):
         return None, None
     
     if not GOOGLE_API_KEY:
-        print("Error: Google API key not configured")
-        return None, None
+        # Fallback: Use Nominatim (OpenStreetMap) if no Google API key is configured.
+        # Nominatim requires a valid User-Agent header.
+        try:
+            nominatim_url = "https://nominatim.openstreetmap.org/search"
+            params = {
+                "q": keyword,
+                "format": "json",
+                "limit": 10,
+            }
+            headers = {"User-Agent": "documentation-pathway-app/1.0 (contact: none)"}
+            resp = requests.get(nominatim_url, params=params, headers=headers, timeout=10)
+            resp.raise_for_status()
+            places = resp.json()
+
+            if not places:
+                print(f"Nominatim: no places found for keyword: {keyword}")
+                return None, None
+
+            # Helper to compute distance (meters) between two lat/lng points
+            def haversine(lat1, lon1, lat2, lon2):
+                R = 6371000  # Earth radius in meters
+                phi1 = math.radians(lat1)
+                phi2 = math.radians(lat2)
+                dphi = math.radians(lat2 - lat1)
+                dlambda = math.radians(lon2 - lon1)
+                a = math.sin(dphi/2)**2 + math.cos(phi1)*math.cos(phi2)*math.sin(dlambda/2)**2
+                return 2 * R * math.atan2(math.sqrt(a), math.sqrt(1-a))
+
+            user_lat = float(user_location.get('lat'))
+            user_lng = float(user_location.get('lng'))
+
+            nearest = None
+            nearest_dist = float('inf')
+            for p in places:
+                try:
+                    plat = float(p.get('lat'))
+                    plng = float(p.get('lon'))
+                except (TypeError, ValueError):
+                    continue
+                dist = haversine(user_lat, user_lng, plat, plng)
+                if dist <= radius and dist < nearest_dist:
+                    nearest_dist = dist
+                    nearest = p
+
+            if nearest:
+                name = nearest.get('display_name', keyword)
+                address = nearest.get('display_name', 'Address not available')
+                return name, address
+            else:
+                print(f"Nominatim: no nearby places within {radius}m for keyword: {keyword}")
+                return None, None
+        except requests.RequestException as e:
+            print(f"Network error fetching Nominatim: {e}")
+            return None, None
+        except Exception as e:
+            print(f"Unexpected Nominatim error: {e}")
+            return None, None
     
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params = {
