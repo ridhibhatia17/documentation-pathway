@@ -3,6 +3,7 @@ import requests
 import os
 from dotenv import load_dotenv
 import math
+from urllib.parse import quote_plus
 
 # Load environment variables from .env
 load_dotenv()
@@ -49,6 +50,34 @@ def get_task_by_id(task_id):
 def list_all_tasks():
     tasks = load_tasks()
     return [task['title'] for task in tasks]
+
+def _build_search_variants(keyword):
+    """Build broader search phrases when the exact place name is too strict."""
+    base = " ".join(str(keyword).split())
+    normalized = base.replace("centre", "center")
+    variants = [base]
+
+    if normalized.lower() != base.lower():
+        variants.append(normalized)
+
+    suffixes = [
+        " center",
+        " centre",
+        " office",
+        " kendra",
+        " facilitation center",
+        " enrollment center",
+        " registration center",
+        " service center",
+        " csc center",
+    ]
+
+    for suffix in suffixes:
+        candidate = f"{normalized}{suffix}"
+        if candidate.lower() not in [variant.lower() for variant in variants]:
+            variants.append(candidate)
+
+    return variants
 
 # -----------------------------
 # ONLINE/OFFLINE CHECKS
@@ -148,39 +177,64 @@ def find_nearest_offline_center(keyword, user_location, radius=5000):
             return None, None
     
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-    params = {
-        "key": GOOGLE_API_KEY,
-        "location": f"{user_location['lat']},{user_location['lng']}",
-        "radius": radius,
-        "keyword": keyword
-    }
+    location = f"{user_location['lat']},{user_location['lng']}"
+    search_variants = _build_search_variants(keyword)
+    radius_candidates = []
+    for candidate_radius in [radius, max(radius * 3, 15000), max(radius * 6, 30000), 50000]:
+        if candidate_radius not in radius_candidates:
+            radius_candidates.append(candidate_radius)
 
     try:
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        
-        if data.get('status') == 'OK':
-            results = data.get('results', [])
-            if results:
-                nearest = results[0]
-                name = nearest.get('name', 'Unknown')
-                address = nearest.get('vicinity', 'Address not available')
-                return name, address
-            else:
-                print(f"No places found for keyword: {keyword}")
-                return None, None
-        else:
-            error_msg = data.get('error_message', 'Unknown API error')
-            print(f"Google Places API error: {data.get('status')} - {error_msg}")
-            return None, None
-            
+        # Try the exact keyword first, then broader variants and wider radii.
+        google_denied = False
+        for variant in search_variants:
+            for candidate_radius in radius_candidates:
+                params = {
+                    "key": GOOGLE_API_KEY,
+                    "location": location,
+                    "radius": candidate_radius,
+                    "keyword": variant,
+                }
+                response = requests.get(url, params=params, timeout=10)
+                response.raise_for_status()
+                data = response.json()
+
+                if data.get('status') == 'OK':
+                    results = data.get('results', [])
+                    if results:
+                        nearest = results[0]
+                        name = nearest.get('name', 'Unknown')
+                        address = nearest.get('vicinity', 'Address not available')
+                        return name, address
+
+                status = data.get('status')
+                if status == 'REQUEST_DENIED':
+                    google_denied = True
+                    print(f"Google Places API denied for keyword '{keyword}': {data.get('error_message', 'Unknown API error')}")
+                    break
+
+                if status not in {'ZERO_RESULTS', 'OK'}:
+                    error_msg = data.get('error_message', 'Unknown API error')
+                    print(f"Google Places API error: {status} - {error_msg}")
+
+            if google_denied:
+                break
+
+        # Immediate fallback: provide a direct maps search instead of timing out.
+        fallback_query = quote_plus(search_variants[0])
+        fallback_maps_url = f"https://www.google.com/maps/search/?api=1&query={fallback_query}"
+        print(f"No verified places found for keyword: {keyword}; returning maps search fallback")
+        return search_variants[0], f"Search maps for {search_variants[0]}", fallback_maps_url
     except requests.RequestException as e:
-        print(f"Network error fetching Google Places: {e}")
-        return None, None
+        print(f"Network error fetching places for keyword '{keyword}': {e}")
+        fallback_query = quote_plus(search_variants[0])
+        fallback_maps_url = f"https://www.google.com/maps/search/?api=1&query={fallback_query}"
+        return search_variants[0], f"Search maps for {search_variants[0]}", fallback_maps_url
     except Exception as e:
-        print(f"Unexpected error fetching Google Places: {e}")
-        return None, None
+        print(f"Unexpected error fetching places for keyword '{keyword}': {e}")
+        fallback_query = quote_plus(search_variants[0])
+        fallback_maps_url = f"https://www.google.com/maps/search/?api=1&query={fallback_query}"
+        return search_variants[0], f"Search maps for {search_variants[0]}", fallback_maps_url
 
 # -----------------------------
 # UTILITIES

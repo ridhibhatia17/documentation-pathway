@@ -956,7 +956,7 @@
 
         directionsBtn.style.display = "inline-block";
         directionsBtn.onclick = function () {
-          const directionsUrl = `https://www.google.com/maps/dir/${userLoc.latitude},${userLoc.longitude}/${encodeURIComponent(center.address)}`;
+          const directionsUrl = center.maps_url || `https://www.google.com/maps/dir/${userLoc.latitude},${userLoc.longitude}/${encodeURIComponent(center.address)}`;
           window.open(directionsUrl, "_blank");
         };
 

@@ -52,16 +52,24 @@ def find_centers():
             return jsonify({'error': 'Invalid coordinate format'}), 400
 
         user_location = {'lat': lat, 'lng': lng}
-        name, address = find_nearest_offline_center(keyword, user_location, radius)
+        center_result = find_nearest_offline_center(keyword, user_location, radius)
+        if len(center_result) == 3:
+            name, address, maps_url = center_result
+        else:
+            name, address = center_result
+            maps_url = None
         
         if name and address:
-            return jsonify({
+            response_data = {
                 'success': True,
                 'center': {
                     'name': name,
                     'address': address
                 }
-            })
+            }
+            if maps_url:
+                response_data['center']['maps_url'] = maps_url
+            return jsonify(response_data)
         else:
             return jsonify({
                 'success': False,
